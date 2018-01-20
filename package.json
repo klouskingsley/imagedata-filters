@@ -1,0 +1,31 @@
+{
+  "name": "imagedata-filters",
+  "version": "0.0.1",
+  "description": "some filters for imagedata of canvas context2d",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": "rollup src/index.js -f umd -n imagedataFilters -o dist/imagedata-filters.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klouskingsley/imagedata-filters.git"
+  },
+  "keywords": [
+    "image",
+    "imagedata",
+    "canvas",
+    "context2d",
+    "css3",
+    "filter"
+  ],
+  "author": "klouskingsley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/klouskingsley/imagedata-filters/issues"
+  },
+  "homepage": "https://github.com/klouskingsley/imagedata-filters#readme",
+  "devDependencies": {
+    "rollup": "^0.54.1"
+  }
+}
