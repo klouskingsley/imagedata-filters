@@ -337,6 +337,65 @@ function contrast$1 (imagedata, opts) {
     return imagedata    
 }
 
+// according to https://drafts.fxtf.org/filter-effects/#opacityEquivalent
+
+function opacity$1 (imagedata, opts) {
+    var i = 0;
+    var data = imagedata.data;
+    var len = data.length;
+    var opts = opts || {amount: 0};
+    var amount = opts.amount || 0;
+    var a;
+
+    var tableValues = [0, +amount];
+
+    for (; i < len; i += 4) {
+        a = getInterpolation(data[i + 3] / 255, tableValues);
+        data[i + 3] = a * 255;
+    }
+    return imagedata
+}
+
+function getInterpolation (c, tableValues) {
+    if (c === 1) {
+        return tableValues[1]
+    }
+
+    return tableValues[0] + c * (tableValues[1] - tableValues[0])
+}
+
+// according to https://drafts.fxtf.org/filter-effects/#invertEquivalent
+
+function invert$1 (imagedata, opts) {
+    var i = 0;
+    var data = imagedata.data;
+    var len = data.length;
+    var opts = opts || {amount: 0};
+    var amount = opts.amount || 0;
+    var r,g,b;
+
+    var tableValues = [+amount, 1 - amount];
+
+    for (; i < len; i += 4) {
+        r = getInterpolation$1(data[i] / 255, tableValues);
+        g = getInterpolation$1(data[i + 1] / 255, tableValues);
+        b = getInterpolation$1(data[i + 2] / 255, tableValues);
+
+        data[i] = r * 255;
+        data[i + 1] = g * 255;
+        data[i + 2] = b * 255;
+    }
+    return imagedata
+}
+
+function getInterpolation$1 (c, tableValues) {
+    if (c === 1) {
+        return tableValues[1]
+    }
+
+    return tableValues[0] + c * (tableValues[1] - tableValues[0])
+}
+
 var index = {
     grayscale: grayscale$1,
     saturate: saturate$1,
@@ -344,7 +403,9 @@ var index = {
     hueRotate: hueRotate$1,
     blur: blur$1,
     brightness: brightness$1,
-    contrast: contrast$1
+    contrast: contrast$1,
+    opacity: opacity$1,
+    invert: invert$1
 }
 
 return index;

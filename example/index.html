@@ -44,7 +44,7 @@
                     var ctx = canvas.getContext('2d')
                     var imgdata = ctx.getImageData(0, 0, canvas.width, canvas.height)
                     console.log(imgdata.data)
-                    imgdata.data = imagedataFilters.contrast(imgdata, {amount: this.grayscaleAmount})
+                    imgdata.data = imagedataFilters.opacity(imgdata, {amount: this.grayscaleAmount})
                     console.log(imgdata.data)
                     ctx.putImageData(imgdata, 0, 0)
                     this.setCanvas(canvas)
