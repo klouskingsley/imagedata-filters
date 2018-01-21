@@ -296,12 +296,55 @@ function gaussian (x, y, deviation) {
     return ret
 }
 
+function brightness$1 (imagedata, opts) {
+    var i = 0;
+    var data = imagedata.data;
+    var len = data.length;
+    var opts = opts || {amount: 0};
+    var amount = opts.amount || 0;
+    var r,g,b;
+
+    for (; i < len; i += 4) {
+        r = data[i] * amount;
+        g = data[i + 1] * amount;
+        b = data[i + 2] * amount;
+
+        data[i] = r;
+        data[i + 1] = g;
+        data[i + 2] = b;
+    }
+    return imagedata    
+}
+
+function contrast$1 (imagedata, opts) {
+    var i = 0;
+    var data = imagedata.data;
+    var len = data.length;
+    var opts = opts || {amount: 0};
+    var amount = opts.amount || 0;
+    var r,g,b;
+    var intercept = -(.5 * amount) + .5;
+
+    for (; i < len; i += 4) {
+        r = data[i] * amount + intercept;
+        g = data[i + 1] * amount + intercept;
+        b = data[i + 2] * amount + intercept;
+
+        data[i] = r;
+        data[i + 1] = g;
+        data[i + 2] = b;
+    }
+    return imagedata    
+}
+
 var index = {
     grayscale: grayscale$1,
     saturate: saturate$1,
     sepia: sepia$1,
     hueRotate: hueRotate$1,
-    blur: blur$1
+    blur: blur$1,
+    brightness: brightness$1,
+    contrast: contrast$1
 }
 
 return index;
