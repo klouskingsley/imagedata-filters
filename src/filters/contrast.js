@@ -1,7 +1,5 @@
 export default contrast
 
-// TODO
-
 function contrast (imagedata, opts) {
     var i = 0
     var data = imagedata.data

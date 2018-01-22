@@ -1,8 +1,5 @@
 export default saturate
 
-// according to https://drafts.fxtf.org/filter-effects/#saturateEquivalent
-
-
 function saturate (imagedata, opts) {
     var i = 0
     var data = imagedata.data

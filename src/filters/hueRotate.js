@@ -1,8 +1,5 @@
 export default hueRotate
 
-/**
- * according to : https://drafts.fxtf.org/filter-effects/#huerotateEquivalent & https://www.w3.org/TR/SVG11/filters.html#feColorMatrixTypeAttribute
- */
 function hueRotate (imagedata, opts) {
     var i = 0
     var data = imagedata.data

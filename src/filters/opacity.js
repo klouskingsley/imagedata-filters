@@ -1,7 +1,5 @@
 export default opacity
 
-// according to https://drafts.fxtf.org/filter-effects/#opacityEquivalent
-
 function opacity (imagedata, opts) {
     var i = 0
     var data = imagedata.data

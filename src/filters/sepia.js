@@ -1,9 +1,5 @@
 export default sepia
 
-// according to https://drafts.fxtf.org/filter-effects/#sepiaEquivalent
-
-// TODO
-
 function sepia (imagedata, opts) {
     var i = 0
     var data = imagedata.data

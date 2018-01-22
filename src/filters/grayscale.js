@@ -1,7 +1,5 @@
 export default grayscale
 
-// according to https://drafts.fxtf.org/filter-effects/#grayscaleEquivalent
-
 function grayscale (imagedata, opts) {
     var i = 0
     var data = imagedata.data

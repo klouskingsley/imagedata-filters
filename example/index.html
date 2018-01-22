@@ -44,7 +44,10 @@
                     var ctx = canvas.getContext('2d')
                     var imgdata = ctx.getImageData(0, 0, canvas.width, canvas.height)
                     console.log(imgdata.data)
-                    imgdata.data = imagedataFilters.contrast(imgdata, {amount: this.grayscaleAmount})
+                    // imagedataFilters.contrast(imgdata, {amount: this.grayscaleAmount})
+                    // imagedataFilters.brightness(imagedataFilters.sepia(imgdata, {amount: .5}), {amount: 1.2})
+                    imagedataFilters.sepia(imagedataFilters.brightness(imgdata, {amount: 1.2}), {amount: .5})
+
                     console.log(imgdata.data)
                     ctx.putImageData(imgdata, 0, 0)
                     this.setCanvas(canvas)

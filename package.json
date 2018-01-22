@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "rollup src/index.js -f umd -n imagedataFilters -o dist/imagedata-filters.js"
+    "bundle": "rollup src/index.js -f umd -n imagedataFilters -o dist/imagedata-filters.js",
+    "uglify": "uglifyjs dist/imagedata-filters.js -m -o dist/imagedata-filters.min.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/klouskingsley/imagedata-filters#readme",
   "devDependencies": {
-    "rollup": "^0.54.1"
+    "rollup": "^0.54.1",
+    "uglify-js": "^3.3.8"
   }
 }

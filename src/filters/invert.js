@@ -1,7 +1,5 @@
 export default invert
 
-// according to https://drafts.fxtf.org/filter-effects/#invertEquivalent
-
 // not consistency of css3 filter invert when amount > 1
 
 function invert (imagedata, opts) {
