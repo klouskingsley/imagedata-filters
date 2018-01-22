@@ -1,12 +1,14 @@
 export default contrast
 
+// TODO
+
 function contrast (imagedata, opts) {
     var i = 0
     var data = imagedata.data
     var len = data.length
     var opts = opts || {amount: 0}
-    var amount = opts.amount || 0
-    var r,g,b,a
+    var amount = +opts.amount || 0
+    var r,g,b
     var intercept = -(.5 * amount) + .5
 
     for (; i < len; i += 4) {

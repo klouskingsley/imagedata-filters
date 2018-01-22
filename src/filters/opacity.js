@@ -7,7 +7,7 @@ function opacity (imagedata, opts) {
     var data = imagedata.data
     var len = data.length
     var opts = opts || {amount: 0}
-    var amount = opts.amount || 0
+    var amount = +opts.amount || 0
     var a
 
     var tableValues = [0, +amount]

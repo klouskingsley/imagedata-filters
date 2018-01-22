@@ -8,7 +8,7 @@ function hueRotate (imagedata, opts) {
     var data = imagedata.data
     var len = data.length
     var opts = opts || {amount: 0}
-    var amount = opts.amount || 0
+    var amount = +opts.amount || 0
     var r,g,b,a
     var valueMatric = hueRotateMatrix(amount)
 

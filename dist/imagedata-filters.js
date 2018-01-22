@@ -8,45 +8,39 @@
 
 function grayscale$1 (imagedata, opts) {
     var i = 0;
-    var data = imagedata;
+    var data = imagedata.data;
     var len = data.length;
     var opts = opts || {amount: 0};
-    var amount = opts.amount || 0;
-    var r,g,b,a;
+    var amount = +opts.amount || 0;
+    var compleAmount = 1 - amount;
+    var r,g,b;
     for (; i < len; i += 4) {
-        r = (0.2126 + 0.7874 * (1 - amount)) * data[i]
-            + (0.7152 - 0.7152 * (1 - amount)) * data[i + 1]
-            + (0.0722 - 0.0722 * (1 -amount)) * data[i + 2]
-            + 0
-            + 0;
-        g = (0.2126 - 0.2126 * (1 - amount)) * data[i]
-            + (0.7152 + 0.2848 * (1 - amount)) * data[i + 1]
-            + (0.0722 - 0.0722 * (1 - amount)) * data[i + 2]
-            + 0
-            + 0;
-        b = (0.2126 - 0.2126 * (1 - amount)) * data[i]
-            + (0.7152 - 0.7152 * (1 - amount)) * data[i + 1]
-            + (0.0722 + 0.9278 * (1 - amount)) * data[i + 2]
-            + 0
-            + 0;
-        a = data[i + 3];
-
+        r = (0.2126 + 0.7874 * compleAmount) * data[i]
+            + (0.7152 - 0.7152 * compleAmount) * data[i + 1]
+            + (0.0722 - 0.0722 * compleAmount) * data[i + 2];
+        g = (0.2126 - 0.2126 * compleAmount) * data[i]
+            + (0.7152 + 0.2848 * compleAmount) * data[i + 1]
+            + (0.0722 - 0.0722 * compleAmount) * data[i + 2];
+        b = (0.2126 - 0.2126 * compleAmount) * data[i]
+            + (0.7152 - 0.7152 * compleAmount) * data[i + 1]
+            + (0.0722 + 0.9278 * compleAmount) * data[i + 2];
         data[i] = r;
         data[i + 1] = g;
         data[i + 2] = b;
-        data[i + 3] = a;
     }
+
     return imagedata
 }
 
 // according to https://drafts.fxtf.org/filter-effects/#saturateEquivalent
+
 
 function saturate$1 (imagedata, opts) {
     var i = 0;
     var data = imagedata.data;
     var len = data.length;
     var opts = opts || {amount: 0};
-    var amount = opts.amount || 0;
+    var amount = +opts.amount || 0;
     var r,g,b;
 
     for (; i < len; i += 4) {
@@ -54,7 +48,7 @@ function saturate$1 (imagedata, opts) {
             + (.715 - .715 * amount) * data[i + 1]
             + (.072 - .072 * amount) * data[i + 2];
         g = (.213 - .213 * amount) * data[i]
-            + (.715 - .285 * amount) * data[i + 1]
+            + (.715 + .285 * amount) * data[i + 1]
             + (.072 - .072 * amount) * data[i + 2];
         b = (.213 - .213 * amount) * data[i]
             + (.715 - .715 * amount) * data[i + 1]
@@ -69,35 +63,31 @@ function saturate$1 (imagedata, opts) {
 
 // according to https://drafts.fxtf.org/filter-effects/#sepiaEquivalent
 
+// TODO
+
 function sepia$1 (imagedata, opts) {
     var i = 0;
-    var data = imagedata;
+    var data = imagedata.data;
     var len = data.length;
     var opts = opts || {amount: 0};
-    var amount = opts.amount || 0;
-    var r,g,b,a;
+    var amount = +opts.amount || 0;
+    var r,g,b;
+    var compleAmount = 1 - amount;
     for (; i < len; i += 4) {
-        r = (0.393 + 0.607 * (1 - amount)) * data[i]
-            + (0.769 - 0.769 * (1 - amount)) * data[i + 1]
-            + (0.189 - 0.189 * (1 -amount)) * data[i + 2]
-            + 0
-            + 0;
-        g = (0.349 - 0.349 * (1 - amount)) * data[i]
-            + (0.684 + 0.314 * (1 - amount)) * data[i + 1]
-            + (0.168 - 0.168 * (1 - amount)) * data[i + 2]
-            + 0
-            + 0;
-        b = (0.272 - 0.272 * (1 - amount)) * data[i]
-            + (0.534 - 0.534 * (1 - amount)) * data[i + 1]
-            + (0.131 + 0.869 * (1 - amount)) * data[i + 2]
-            + 0
-            + 0;
-        a = data[i + 3];
+
+        r = (0.393 + 0.607 * compleAmount) * data[i]
+            + (0.769 - 0.769 * compleAmount) * data[i + 1]
+            + (0.189 - 0.189 * compleAmount) * data[i + 2];
+        g = (0.349 - 0.349 * compleAmount) * data[i]
+            + (0.684 + 0.314 * compleAmount) * data[i + 1]
+            + (0.168 - 0.168 * compleAmount) * data[i + 2];
+        b = (0.272 - 0.272 * compleAmount) * data[i]
+            + (0.534 - 0.534 * compleAmount) * data[i + 1]
+            + (0.131 + 0.869 * compleAmount) * data[i + 2];
 
         data[i] = r;
         data[i + 1] = g;
         data[i + 2] = b;
-        data[i + 3] = a;
     }
     return imagedata
 }
@@ -110,7 +100,7 @@ function hueRotate$1 (imagedata, opts) {
     var data = imagedata.data;
     var len = data.length;
     var opts = opts || {amount: 0};
-    var amount = opts.amount || 0;
+    var amount = +opts.amount || 0;
     var r,g,b;
     var valueMatric = hueRotateMatrix(amount);
 
@@ -301,7 +291,7 @@ function brightness$1 (imagedata, opts) {
     var data = imagedata.data;
     var len = data.length;
     var opts = opts || {amount: 0};
-    var amount = opts.amount || 0;
+    var amount = +opts.amount || 0;
     var r,g,b;
 
     for (; i < len; i += 4) {
@@ -316,12 +306,14 @@ function brightness$1 (imagedata, opts) {
     return imagedata    
 }
 
+// TODO
+
 function contrast$1 (imagedata, opts) {
     var i = 0;
     var data = imagedata.data;
     var len = data.length;
     var opts = opts || {amount: 0};
-    var amount = opts.amount || 0;
+    var amount = +opts.amount || 0;
     var r,g,b;
     var intercept = -(.5 * amount) + .5;
 
@@ -344,7 +336,7 @@ function opacity$1 (imagedata, opts) {
     var data = imagedata.data;
     var len = data.length;
     var opts = opts || {amount: 0};
-    var amount = opts.amount || 0;
+    var amount = +opts.amount || 0;
     var a;
 
     var tableValues = [0, +amount];
@@ -366,12 +358,14 @@ function getInterpolation (c, tableValues) {
 
 // according to https://drafts.fxtf.org/filter-effects/#invertEquivalent
 
+// not consistency of css3 filter invert when amount > 1
+
 function invert$1 (imagedata, opts) {
     var i = 0;
     var data = imagedata.data;
     var len = data.length;
     var opts = opts || {amount: 0};
-    var amount = opts.amount || 0;
+    var amount = +opts.amount || 0;
     var r,g,b;
 
     var tableValues = [+amount, 1 - amount];
