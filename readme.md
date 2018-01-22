@@ -66,6 +66,10 @@ All the apis is similar to css3 filter function, the difference between css3 fil
 
 > use `blur` carefully, because Gaussiam blur compute may has a performance issue with the increase of `options.amount`
 
+## License
+
+MIT
+
 
 
 # 中文文档
@@ -131,3 +135,7 @@ $ npm i imagedata-filters
 
 > 使用`blur`时注意，因为随着`options.amount`的增大，高斯模糊的计算可能会有性能问题.
 
+
+## License
+
+MIT
