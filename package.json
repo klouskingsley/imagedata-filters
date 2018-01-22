@@ -1,8 +1,9 @@
 {
   "name": "imagedata-filters",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "some filters for imagedata of canvas context2d",
-  "main": "dist/index.js",
+  "main": "dist/imagedata-filter.js",
+  "module": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bundle": "rollup src/index.js -f umd -n imagedataFilters -o dist/imagedata-filters.js",
