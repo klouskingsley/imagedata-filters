@@ -1,8 +1,8 @@
 {
   "name": "imagedata-filters",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "some filters for imagedata of canvas context2d",
-  "main": "dist/imagedata-filter.js",
+  "main": "dist/imagedata-filters.js",
   "module": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
