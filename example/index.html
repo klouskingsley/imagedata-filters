@@ -10,13 +10,25 @@
             width: 400px;
             height: 400px;
         }
+        .blk {
+            display: inline-block;
+        }
+        .control-container, .image-container {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div id="app">
         <div class="image-container">
-            <img v-bind:src="src" id="img"/>
-            <img src="./atx.jpg" id="originImg"/>
+            <div class="blk">
+                <p>imagedata filters</p>
+                <img v-bind:src="src" id="img"/>
+            </div>
+            <div class="blk">
+                <p>css3 filters</p>
+                <img src="./atx.jpg" id="originImg" v-bind:style="{filter: 'grayscale(' + grayscaleAmount + '%)'}"/>
+            </div>
         </div>
         <div class="control-container">
             <div>grayscale amount:
@@ -36,19 +48,11 @@
             },
             methods: {
                 changeSrc: function () {
-                    // if (this.grayscaleAmount < 0 || this.grayscaleAmount > 100) {
-                    //     return
-                    // }
-                    console.log('changesrc')
                     var canvas = this.getCanvas()
                     var ctx = canvas.getContext('2d')
                     var imgdata = ctx.getImageData(0, 0, canvas.width, canvas.height)
-                    console.log(imgdata.data)
-                    // imagedataFilters.contrast(imgdata, {amount: this.grayscaleAmount})
-                    // imagedataFilters.brightness(imagedataFilters.sepia(imgdata, {amount: .5}), {amount: 1.2})
-                    imagedataFilters.sepia(imagedataFilters.brightness(imgdata, {amount: 1.2}), {amount: .5})
+                    imagedataFilters.grayscale(imgdata, {amount: this.grayscaleAmount / 100})
 
-                    console.log(imgdata.data)
                     ctx.putImageData(imgdata, 0, 0)
                     this.setCanvas(canvas)
                 },
