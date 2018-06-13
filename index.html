@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>imagedata-filters</title>
+    <style>
+        img {
+            width: 400px;
+            height: 400px;
+        }
+        .blk {
+            display: inline-block;
+        }
+        .control-container, .image-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="image-container">
+            <div class="blk">
+                <p>imagedata filters</p>
+                <img v-bind:src="src" id="img"/>
+            </div>
+            <div class="blk">
+                <p>css3 filters</p>
+                <img src="./atx.jpg" id="originImg" v-bind:style="{filter: 'grayscale(' + grayscaleAmount + '%)'}"/>
+            </div>
+        </div>
+        <div class="control-container">
+            <div>grayscale amount:
+                <input @change="changeSrc" type="number" v-model="grayscaleAmount"> %
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="../dist/imagedata-filters.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                src: './atx.jpg',
+                grayscaleAmount: 0
+            },
+            methods: {
+                changeSrc: function () {
+                    var canvas = this.getCanvas()
+                    var ctx = canvas.getContext('2d')
+                    var imgdata = ctx.getImageData(0, 0, canvas.width, canvas.height)
+                    imagedataFilters.grayscale(imgdata, {amount: this.grayscaleAmount / 100})
+
+                    ctx.putImageData(imgdata, 0, 0)
+                    this.setCanvas(canvas)
+                },
+
+                getCanvas: function () {
+                    var img = document.getElementById('originImg')
+                    var canvas = document.createElement('canvas')
+                    canvas.setAttribute('width', img.naturalWidth)
+                    canvas.setAttribute('height', img.naturalHeight)
+
+                    var ctx = canvas.getContext('2d')
+                    ctx.drawImage(img, 0, 0)
+                    return canvas
+                },
+
+                setCanvas: function (canvas) {
+                    var ctx = canvas.getContext('2d')
+                    this.src = canvas.toDataURL()
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>
